@@ -2,11 +2,11 @@ comptime UP = UInt8(ord('^'))
 comptime DOWN = UInt8(ord('v'))
 comptime FLAT = UInt8(ord('-'))
 
-def part1(lines: List[List[UInt8]]) -> String: 
+def part1(lines: List[String]) -> String: 
     ref line = lines[0]
     var position = 0
     var max_position = 0
-    for command in line:
+    for command in line.bytes():
         if command == UP:
             position += 1
         elif command == DOWN:
@@ -14,13 +14,13 @@ def part1(lines: List[List[UInt8]]) -> String:
         max_position = max(max_position, position)
     return String(max_position)
 
-def part2(lines: List[List[UInt8]]) -> String: 
+def part2(lines: List[String]) -> String: 
     ref line = lines[0]
     var position = 0
     var max_position = 0
     var prev_direction = FLAT
     var step = 1
-    for command in line:
+    for command in line.bytes():
         if command != prev_direction:
             step = 1
         if command == UP:
@@ -43,14 +43,14 @@ def fib(n: Int) -> Int:
         b = c
     return b
 
-def part3(lines: List[List[UInt8]]) -> String:
+def part3(lines: List[String]) -> String:
     var line = lines[0].copy()
-    line.append(FLAT)
+    line += "-"
     var position = 0
     var max_position = 0
     var prev_direction = FLAT
     var acc = 0
-    for command in line:
+    for command in line.bytes():
         if command != prev_direction:
             if prev_direction == UP:
                 position += fib(acc)

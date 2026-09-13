@@ -1,0 +1,11 @@
+[tools]
+uv = "latest"
+
+[env]
+_.python.venv = { path = ".venv" }
+
+[tasks.solve]
+run = "mojo src/main.mojo"
+
+[tasks.build]
+run = "mojo build src/main.mojo"
