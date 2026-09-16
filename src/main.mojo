@@ -5,6 +5,7 @@ from p3 import solution as p3sol
 from p4 import solution as p4sol
 from p5 import solution as p5sol
 from p6 import solution as p6sol
+from p7 import solution as p7sol
 
 def main():
     var lines = get_lines("data/1.txt")
@@ -31,3 +32,5 @@ def main():
     print("6-1: " + p6sol.part1(lines))
     print("6-2: " + p6sol.part2(lines))
     print("6-3: " + p6sol.part3(lines))
+    lines = get_lines("data/7.txt")
+    print("7-1: " + p7sol.part1(lines))
