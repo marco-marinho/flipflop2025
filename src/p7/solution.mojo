@@ -1,3 +1,5 @@
+from std.math import factorial
+
 struct Matrix2D:
     var rows: Int
     var cols: Int
@@ -52,9 +54,40 @@ def dp(rows: Int, cols: Int) -> Int:
             matrix[r, c] = right + down
     return matrix[0, 0]
 
+def dp3d(layers: Int, rows: Int, cols: Int) -> Int:
+    var matrix = Grid3D(layers, rows, cols)
+    matrix[layers - 1, rows - 1, cols - 1] = 1
+    for c in range(cols - 1, -1, -1):
+        for r in range(rows - 1, -1, -1):
+            for l in range(layers - 1, -1, -1):
+                if l == layers - 1 and r == rows - 1 and c == cols - 1:
+                    continue
+                var right = 0 if c == cols - 1 else matrix[l, r, c + 1]
+                var down = 0 if r == rows - 1 else matrix[l, r + 1, c]
+                var forward = 0 if l == layers - 1 else matrix[l + 1, r, c]
+                matrix[l, r, c] = right + down + forward
+    return matrix[0, 0, 0]
+
+def path_count(M: Int, N: Int) -> Int:
+    return factorial(M * (N - 1)) / (factorial(N - 1) ** M)
+
 def part1(input: List[String]) -> String:
     var grids = [parse_grid(s) for s in input]
     var count = 0
     for (rows, cols) in grids:
         count += dp(rows, cols)
+    return String(count)
+
+def part2(input: List[String]) -> String:
+    var grids = [parse_grid(s) for s in input]
+    var count = 0
+    for (rows, cols) in grids:
+        count += dp3d(rows, cols, rows)
+    return String(count)
+
+def part3(input: List[String]) -> String:
+    var grids = [parse_grid(s) for s in input]
+    var count = 0
+    for (rows, cols) in grids:
+        count += path_count(rows, cols)
     return String(count)

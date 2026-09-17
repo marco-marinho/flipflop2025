@@ -34,3 +34,5 @@ def main():
     print("6-3: " + p6sol.part3(lines))
     lines = get_lines("data/7.txt")
     print("7-1: " + p7sol.part1(lines))
+    print("7-2: " + p7sol.part2(lines))
+    print("7-3: " + p7sol.part3(lines))
